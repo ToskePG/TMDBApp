@@ -1,4 +1,4 @@
-package com.example.tmdbapp.data
+package com.example.tmdbapp.domain.model
 
 import androidx.annotation.DrawableRes
 
