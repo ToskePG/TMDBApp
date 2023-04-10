@@ -1,6 +1,7 @@
-package com.example.tmdbapp.presentation.splash
+package com.example.tmdbapp.presentation.home
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,14 +22,17 @@ import androidx.compose.ui.unit.sp
 import com.example.tmdbapp.ui.theme.TMDBAppTheme
 
 @Composable
-fun SearchBar(
+fun ColumnScope.SearchBar(
     value: String,
     placeholder: String,
     isError: Boolean,
     onSearch: () -> Unit,
     onTextChanged: (text: String) -> Unit
 ){
-    Column{
+    Column(
+        modifier = Modifier
+            .weight(.1f)
+    ){
         Text(text = "What do you want to watch?",
         color = White,
         fontWeight = FontWeight.Bold,
@@ -71,12 +75,14 @@ fun SearchBar(
 @Composable
 fun SearchBarPreview(){
     TMDBAppTheme {
-        SearchBar(
-            value = "Search",
-            placeholder = "Search",
-            isError = false,
-            onSearch = { /*TODO*/ },
-            onTextChanged = {println("Search")}
-        )
+        Column{
+            SearchBar(
+                value = "",
+                placeholder = "Search for movies...",
+                isError = false,
+                onSearch = { /*TODO*/ },
+                onTextChanged = {}
+            )
+        }
     }
 }

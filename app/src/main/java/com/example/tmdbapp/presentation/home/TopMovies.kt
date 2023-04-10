@@ -12,7 +12,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.tmdbapp.domain.model.Movie
-import com.example.tmdbapp.presentation.splash.MoviePoster
 import com.example.tmdbapp.ui.theme.DarkBlue
 
 @Composable
@@ -24,7 +23,7 @@ fun ColumnScope.TopMovies(
             .fillMaxSize()
             .padding(all = 24.dp)
             .background(DarkBlue)
-            .weight(0.5f),
+            .weight(0.4f),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceEvenly,
     ){
