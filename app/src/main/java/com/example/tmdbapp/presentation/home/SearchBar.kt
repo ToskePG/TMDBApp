@@ -13,6 +13,7 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.Black
+import androidx.compose.ui.graphics.Color.Companion.Gray
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -31,15 +32,18 @@ fun ColumnScope.SearchBar(
 ){
     Column(
         modifier = Modifier
-            .weight(.1f)
+            .weight(.14f)
     ){
         Text(text = "What do you want to watch?",
         color = White,
         fontWeight = FontWeight.Bold,
-        fontSize = 24.sp)
+        fontSize = 20.sp,
+        modifier = Modifier
+            .padding(start = 16.dp, top = 8.dp))
+
         OutlinedTextField(
             modifier = Modifier
-                .padding(all = 10.dp)
+                .padding(all = 16.dp)
                 .fillMaxSize(),
             value = value,
             singleLine = true,
@@ -51,7 +55,7 @@ fun ColumnScope.SearchBar(
                 onSearch = { onSearch() }
             ),
             placeholder = {
-                Text(text = placeholder, color = White)
+                Text(text = placeholder, color = Gray)
             },
             trailingIcon = {
                 IconButton(onClick = { onSearch() }) {
