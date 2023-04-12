@@ -72,7 +72,6 @@ fun ColumnScope.SearchBar(
             )
         )
     }
-    
 }
 
 @Preview

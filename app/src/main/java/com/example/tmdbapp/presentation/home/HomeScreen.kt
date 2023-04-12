@@ -17,5 +17,4 @@ fun HomeScreen(){
         TopMovies(topMovies = Constants.getMovies())
         TopMovies(topMovies = Constants.getMovies())
     }
-    
 }
