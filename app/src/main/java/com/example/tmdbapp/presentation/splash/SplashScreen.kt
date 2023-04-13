@@ -31,11 +31,10 @@ fun Splash(){
     }
 }
 
-@Preview(showBackground = true)
+@Preview
 @Composable
-fun SplashScreenPreview() {
+fun SplashScreenView(){
     TMDBAppTheme {
         SplashScreen()
     }
 }
-
