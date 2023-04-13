@@ -3,16 +3,12 @@ package com.example.tmdbapp.presentation.home
 import androidx.compose.material.Tab
 import androidx.compose.material.TabRow
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.vector.ImageVector
-import com.example.tmdbapp.domain.model.Movie
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.tmdbapp.ui.theme.TMDBAppTheme
 
 @Composable
-fun MovieTab(
+fun MovieTabComponent(
     selectedTabIndex: Int,
     onSelectedTab: (TabPage) -> Unit
 ){
@@ -26,9 +22,16 @@ fun MovieTab(
         }
     }
 }
+enum class TabPage{
+    NOW_PLAYING,
+    POPULAR,
+    UPCOMING
+}
 
-enum class TabPage(val icon: ImageVector){
-    NOW_PLAYING(Icons.Default.Home),
-    POPULAR(Icons.Default.Favorite),
-    UPCOMING(Icons.Default.Add)
+@Preview
+@Composable
+fun MovieTabComponentPreview(){
+    TMDBAppTheme {
+        MovieTabComponent(selectedTabIndex = 1, onSelectedTab = {})
+    }
 }
