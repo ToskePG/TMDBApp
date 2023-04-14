@@ -1,6 +1,6 @@
 package com.example.tmdbapp.data.repository
 
-import com.example.tmdbapp.data.remote.MovieApi
+import com.example.tmdbapp.data.remote.services.MovieApi
 import com.example.tmdbapp.domain.repository.MovieRepository
 
 class MovieRepositoryImpl(
