@@ -9,6 +9,21 @@ buildscript {
         junit_test_version = '1.1.5'
         espresso_core_version = '3.5.1'
         pager_version = '0.18.0'
+        retrofit_version = '2.9.0'
+        okhttp_version = '5.0.0-alpha.3'
+        corutines_core_version = '1.4.2'
+        corutines_android_version = '1.4.1'
+        lifecycle_viewmodel_version = '2.2.0'
+        hilt_version = '2.40.5'
+        hilt_lifecycle_version = '1.0.0-alpha03'
+        hilt_compiler_version = '1.0.0'
+    }
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath "com.google.dagger:hilt-android-gradle-plugin:2.40.5"
     }
 }// Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
