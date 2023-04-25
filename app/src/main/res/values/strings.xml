@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TMDBApp</string>
+    <string name ="emtpy_state">we are sorry, we can not find the movie :(</string>
 </resources>
