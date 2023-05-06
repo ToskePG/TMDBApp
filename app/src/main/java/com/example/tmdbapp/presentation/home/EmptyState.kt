@@ -26,6 +26,5 @@ fun EmptyStateScreen(){
                 contentDescription = null)
             Text("There were no movies found :(")
         }
-
     }
 }
