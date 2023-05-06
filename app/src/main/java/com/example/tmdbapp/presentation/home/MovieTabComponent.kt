@@ -16,12 +16,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.material.Tab
 import androidx.compose.material.Text
 import androidx.compose.ui.unit.sp
+import com.example.tmdbapp.domain.model.Movie
 import com.example.tmdbapp.ui.theme.TMDBAppTheme
 
 @Composable
 fun MovieTabComponent(
     selectedTabIndex: Int,
-    onSelectedTab: (TabPage) -> Unit
+    onSelectedTab: (TabPage) -> Unit,
 ){
     TabRow(selectedTabIndex = selectedTabIndex,
         indicator = {tabPositions ->
