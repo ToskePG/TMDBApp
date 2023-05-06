@@ -1,8 +1,22 @@
 package com.example.tmdbapp.core.components
 
+import android.graphics.drawable.Icon
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.Icon
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Blue
+import androidx.compose.ui.graphics.Color.Companion.LightGray
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.tmdbapp.core.navigation.Screen
+import com.example.tmdbapp.domain.model.BottomNavItem
 
 @Composable
 fun BottomNavBar(
@@ -28,7 +42,7 @@ fun BottomNavBar(
     )
     val backStackEntry = navController.currentBackStackEntryAsState()
     BottomNavigation(
-        backgroundColor = Gray2,
+        backgroundColor = Color.Gray,
         elevation = 5.dp
     ) {
         items.forEach { item ->
@@ -51,15 +65,5 @@ fun BottomNavBar(
                 label = { Text(text = item.text) }
             )
         }
-    }
-}
-@Preview(showBackground = true)
-@Composable
-fun BottomNavigationBarPreview() {
-    TMDBAppTheme {
-        BottomNavigationBar(
-            navController = rememberNavController(),
-            onItemClick = {}
-        )
     }
 }
