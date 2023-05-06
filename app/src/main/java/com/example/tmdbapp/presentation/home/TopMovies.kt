@@ -28,7 +28,7 @@ fun ColumnScope.TopMovies(
         horizontalArrangement = Arrangement.SpaceEvenly,
     ){
         items(topMovies){ item ->  
-            MoviePoster(movie_Poster = item.moviePoster)
+            MoviePoster(movie_Poster = item.poster)
         }
     }
 }
