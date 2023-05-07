@@ -1,7 +1,6 @@
-package com.example.tmdbapp.presentation.home
+package com.example.tmdbapp.core.components
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -15,32 +14,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.Gray
 import androidx.compose.ui.graphics.Color.Companion.White
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.tmdbapp.ui.theme.TMDBAppTheme
 
 @Composable
-fun ColumnScope.SearchBar(
+fun SearchBar(
     value: String,
     placeholder: String,
     isError: Boolean,
     onSearch: () -> Unit,
     onTextChanged: (text: String) -> Unit
 ){
-    Column(
-        modifier = Modifier
-            .weight(.14f)
-    ){
-        Text(text = "What do you want to watch?",
-        color = White,
-        fontWeight = FontWeight.Bold,
-        fontSize = 20.sp,
-        modifier = Modifier
-            .padding(start = 16.dp, top = 8.dp))
-
         OutlinedTextField(
             modifier = Modifier
                 .padding(all = 16.dp)
@@ -71,7 +57,6 @@ fun ColumnScope.SearchBar(
                 cursorColor = White
             )
         )
-    }
 }
 
 @Preview

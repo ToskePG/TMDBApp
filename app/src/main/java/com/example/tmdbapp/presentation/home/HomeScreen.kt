@@ -9,13 +9,5 @@ import com.example.tmdbapp.presentation.SharedViewModel
 fun HomeScreen(
     viewModel : SharedViewModel
 ){
-    Column {
-        SearchBar(
-            value = "",
-            placeholder = "Search for the movie",
-            isError = false,
-            onSearch = { /*TODO*/ },
-            onTextChanged = {}
-        )
-    }
+
 }
