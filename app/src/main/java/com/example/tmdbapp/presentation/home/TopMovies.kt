@@ -1,34 +1,35 @@
 package com.example.tmdbapp.presentation.home
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import com.example.tmdbapp.R
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.example.tmdbapp.domain.model.Movie
-import com.example.tmdbapp.ui.theme.DarkBlue
 
 @Composable
-fun ColumnScope.TopMovies(
+fun TopMovies(
     topMovies: List<Movie>
 ){
-    LazyRow(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(all = 24.dp)
-            .background(DarkBlue)
-            .weight(0.4f),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceEvenly,
+    LazyRow(modifier = Modifier
+        .fillMaxSize()
+        .padding(12.dp),
+        horizontalArrangement = Arrangement.spacedBy(30.dp)
     ){
-        items(topMovies){ item ->  
-            MoviePoster(movie_Poster = item.poster)
+        items(topMovies){ item: Movie ->
+            AsyncImage(
+                modifier = Modifier
+                    .clip(shape = RoundedCornerShape(16.dp))
+                    .height(210.dp)
+                    .width(140.dp),
+                model = stringResource(id = R.string.poster_template, item.poster),
+                contentDescription =null)
         }
     }
 }

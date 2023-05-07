@@ -33,3 +33,16 @@ fun Int.idToGenre() : String {
     if(this == 19751) return "Family"
     return ""
 }
+
+fun String.toTabName() : String{
+    var tab : String = this[0].toString()
+    for (i in  1 until this.length){
+        if(this[i] == '_'){
+            tab+=" "
+        }
+        else{
+            tab+= this[i].lowercase()
+        }
+    }
+    return tab
+}
