@@ -121,8 +121,12 @@ class SharedViewModel @Inject constructor(
     private fun searchMovies(query : String){
         viewModelScope.launch {
             repository.getSearch(query = query).collectLatest { networkResponse ->
+                val movies = networkResponse.data
                 when(networkResponse){
                     is NetworkResponse.Success ->{
+                        if (movies != null) {
+                            state = state.copy(searchList = movies)
+                        }
                     }
                     is NetworkResponse.Error -> {
                         state = state.copy( isError = true )
@@ -163,7 +167,8 @@ data class SharedState(
     val tabPage : Int = 0,
     val query: String = String(),
     val searchList : List<Movie> = listOf(),
-    val shouldShowBottomNavBar : Boolean = true
+    val shouldShowBottomNavBar : Boolean = true,
+    val watchList : MutableList<Movie> = mutableListOf()
 )
 sealed class SharedEvent {
     data class QueryChanged(val query: String) : SharedEvent()
