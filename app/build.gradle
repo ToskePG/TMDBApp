@@ -63,6 +63,9 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
     implementation "com.google.accompanist:accompanist-pager:$pager_version"
 
+    //Coil
+    implementation "io.coil-kt:coil-compose:$coil_version"
+
     // Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$corutines_core_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$corutines_android_version"
@@ -79,7 +82,8 @@ dependencies {
     implementation "androidx.hilt:hilt-navigation-compose:$hilt_compiler_version"
 
     // Shared prefs
-    implementation 'androidx.preference:preference:1.2.0'
+    implementation "androidx.preference:preference:$share_pref_version"
+    implementation "com.google.code.gson:gson:$gson_version"
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"

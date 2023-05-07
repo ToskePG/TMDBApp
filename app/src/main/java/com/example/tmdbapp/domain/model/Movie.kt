@@ -3,8 +3,7 @@ package com.example.tmdbapp.domain.model
 import androidx.annotation.DrawableRes
 
 data class Movie (
-    @DrawableRes
-    val poster : Int,
+    val poster : String,
     val id : Int,
     val title : String,
     val votes : Float,
