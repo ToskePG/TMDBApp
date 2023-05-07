@@ -24,8 +24,8 @@ fun SearchBar(
     value: String,
     placeholder: String,
     isError: Boolean,
-    onSearch: () -> Unit,
-    onTextChanged: (text: String) -> Unit
+    onTextChanged: (text: String) -> Unit,
+    onSearch: () -> Unit
 ){
         OutlinedTextField(
             modifier = Modifier
