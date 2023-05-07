@@ -1,4 +1,12 @@
 <resources>
-    <string name="app_name">TMDBApp</string>
-    <string name ="emtpy_state">we are sorry, we can not find the movie :(</string>
+    <string name="app_name">TMBD App</string>
+    <string name="search">Search</string>
+    <string name="watch">What do you want to watch?</string>
+    <string name="poster_template">https://image.tmdb.org/t/p/original%1$s</string>
+    <string name="runtime_template">%d minutes</string>
+    <string name="search_error_1">We Are Sorry, We Can Not Find The Movie :(</string>
+    <string name="search_error_2">Find your movie by Type title, categories, years, etc </string>
+    <string name="watch_list">Watch list</string>
+    <string name="watch_list_empty_1">There is no movie yet!</string>
+    <string name="watch_list_empty_2">Find your movie by Type title, categories, years, etc </string>
 </resources>

@@ -17,7 +17,5 @@ fun HomeScreen(
             onSearch = { /*TODO*/ },
             onTextChanged = {}
         )
-        TopMovies(topMovies = Constants.getMovies())
-        TopMovies(topMovies = Constants.getMovies())
     }
 }
