@@ -1,5 +1,6 @@
 package com.example.tmdbapp.di
 
+import com.example.tmdbapp.BuildConfig
 import com.example.tmdbapp.core.utils.Constants
 import com.example.tmdbapp.data.remote.services.MovieApi
 import com.example.tmdbapp.data.remote.MovieApiInterceptor
@@ -31,7 +32,7 @@ object AppModule {
 
     fun provideMovieApi() : MovieApi {
         return Retrofit.Builder()
-            .baseUrl(Constants.BASE_URL)
+            .baseUrl(BuildConfig.BASE_URL)
             .build()
             .create(MovieApi::class.java)
     }

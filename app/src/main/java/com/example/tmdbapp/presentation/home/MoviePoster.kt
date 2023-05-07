@@ -13,7 +13,6 @@ import com.example.tmdbapp.R
 
 @Composable
 fun MoviePoster(
-    // Before API calls, later change to URL
     movie_Poster: String
 ){
     Box (modifier = Modifier
