@@ -10,7 +10,7 @@ import com.example.tmdbapp.core.navigation.Routes.SEARCH_SCREEN
 import com.example.tmdbapp.presentation.SharedViewModel
 import com.example.tmdbapp.presentation.search.SearchScreen
 
-fun NavGraphBuilder.searchScreenComposable(
+infix fun NavGraphBuilder.searchScreenComposable(
     navController: NavController
 ){
     composable(route = SEARCH_SCREEN) { navBackStackEntry ->

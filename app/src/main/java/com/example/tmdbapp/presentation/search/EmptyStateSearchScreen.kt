@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -12,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.tmdbapp.R
 import com.example.tmdbapp.ui.theme.DarkBlue
 import com.example.tmdbapp.ui.theme.TMDBAppTheme
@@ -24,8 +26,11 @@ fun EmptyStateScreen(){
             .background(DarkBlue),
         contentAlignment = Alignment.Center
     ){
-        Column {
-            Image(painter = painterResource(id = R.drawable.empty_screen_icon),
+        Column{
+            Image(
+                modifier = Modifier
+                    .padding(start = 120.dp),
+                painter = painterResource(id = R.drawable.empty_screen_icon),
                 contentDescription = null)
             Text(stringResource(id = R.string.empty_state))
         }
