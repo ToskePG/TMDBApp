@@ -1,4 +1,4 @@
-package com.example.tmdbapp.presentation.home
+package com.example.tmdbapp.presentation.search
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -10,21 +10,32 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.tmdbapp.R
 import com.example.tmdbapp.ui.theme.DarkBlue
+import com.example.tmdbapp.ui.theme.TMDBAppTheme
 
 @Composable
 fun EmptyStateScreen(){
     Box(
-    modifier = Modifier
-        .fillMaxSize()
-        .background(DarkBlue),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(DarkBlue),
         contentAlignment = Alignment.Center
     ){
         Column {
             Image(painter = painterResource(id = R.drawable.empty_screen_icon),
                 contentDescription = null)
-            Text("There were no movies found :(")
+            Text(stringResource(id = R.string.empty_state))
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun EmptyStateScreenPreview(){
+    TMDBAppTheme {
+        EmptyStateScreen()
     }
 }
