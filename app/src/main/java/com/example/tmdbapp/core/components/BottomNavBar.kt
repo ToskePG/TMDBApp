@@ -17,6 +17,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.tmdbapp.core.navigation.Screen
 import com.example.tmdbapp.domain.model.BottomNavItem
+import com.example.tmdbapp.ui.theme.DarkBlue
 
 @Composable
 fun BottomNavBar(
@@ -42,7 +43,7 @@ fun BottomNavBar(
     )
     val backStackEntry = navController.currentBackStackEntryAsState()
     BottomNavigation(
-        backgroundColor = Color.Gray,
+        backgroundColor = DarkBlue,
         elevation = 5.dp
     ) {
         items.forEach { item ->

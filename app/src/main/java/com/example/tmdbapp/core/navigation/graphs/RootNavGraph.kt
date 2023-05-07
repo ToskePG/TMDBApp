@@ -17,7 +17,7 @@ infix fun NavGraphBuilder.rootNavGraph(
         startDestination = HOME_SCREEN
     ){
         this homeScreenComposable navController
-        searchScreenComposable()
+        this searchScreenComposable navController
         watchListScreenComposable()
     }
 }
