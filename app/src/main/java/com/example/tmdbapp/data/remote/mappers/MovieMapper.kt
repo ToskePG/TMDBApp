@@ -23,6 +23,5 @@ fun MoviesDto.toMovies() : List<Movie>{
             )
         )
     }
-
     return result.toList()
 }
