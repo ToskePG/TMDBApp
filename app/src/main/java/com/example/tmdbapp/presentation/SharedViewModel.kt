@@ -9,10 +9,12 @@ import com.example.tmdbapp.core.utils.Constants
 import com.example.tmdbapp.core.utils.NetworkResponse
 import com.example.tmdbapp.domain.model.Movie
 import com.example.tmdbapp.domain.repository.MovieRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class SharedViewModel @Inject constructor(
     private val repository: MovieRepository
 ) : ViewModel() {
