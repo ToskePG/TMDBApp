@@ -153,5 +153,4 @@ fun MovieDetailsComponentPreview() {
             )
         )
     }
-
 }

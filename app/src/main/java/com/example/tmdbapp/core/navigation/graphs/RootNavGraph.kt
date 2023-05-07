@@ -18,6 +18,6 @@ infix fun NavGraphBuilder.rootNavGraph(
     ){
         this homeScreenComposable navController
         this searchScreenComposable navController
-        watchListScreenComposable()
+        this watchListScreenComposable navController
     }
 }
