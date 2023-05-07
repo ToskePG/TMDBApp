@@ -152,7 +152,6 @@ class SharedViewModel @Inject constructor(
 
 }
 
-
 data class SharedState(
     val shouldShowSearch: Boolean = false,
     val isError: Boolean = false,
