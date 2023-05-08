@@ -24,7 +24,7 @@ infix fun NavGraphBuilder.homeScreenComposable(
             toSearchScreen = {
                 navController.navigate(route = SEARCH_SCREEN)
             },
-            toMovieDetails = {
+            getMovieDetails = {
                 navController.navigate(route = DETAILS_SCREEN)
             }
         )

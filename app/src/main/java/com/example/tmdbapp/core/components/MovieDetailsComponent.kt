@@ -95,7 +95,7 @@ fun MovieDetailsComponent(
                     )
                 }
                 Row(
-                    horizontalArrangement = Arrangement.spacedBy(5.5.dp)
+                    horizontalArrangement = Arrangement.spacedBy(5.dp)
                 ) {
                     Icon(
                         painter = painterResource(id =  R.drawable.genre_ic),

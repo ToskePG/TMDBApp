@@ -12,23 +12,24 @@ import androidx.compose.ui.unit.sp
 import com.example.tmdbapp.presentation.SharedViewModel
 import com.example.tmdbapp.ui.theme.DarkBlue
 import androidx.compose.material.Text
+import androidx.compose.ui.text.font.FontWeight
 import com.example.tmdbapp.R
 import com.example.tmdbapp.core.components.SearchBar
 import com.example.tmdbapp.presentation.SharedEvent
 
 @Composable
 fun HomeScreen(
-    viewModel : SharedViewModel,
-    toSearchScreen: () -> Unit,
-    toMovieDetails : () -> Unit
-){
+    viewModel: SharedViewModel,
+    toSearchScreen : () ->Unit,
+    getMovieDetails : () -> Unit
+) {
     val state = viewModel.state
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(DarkBlue)
-    ) {
-        Row(
+    ){
+        Row (
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 24.dp)
@@ -39,8 +40,10 @@ fun HomeScreen(
             Text(
                 text = stringResource(id = R.string.watch),
                 fontSize = 18.sp,
-                color = White
+                color = White,
+                fontWeight = FontWeight.Bold
             )
+
         }
         Row(
             modifier = Modifier
@@ -52,10 +55,11 @@ fun HomeScreen(
                 value = state.query,
                 placeholder = stringResource(id = R.string.search),
                 isError = state.isError,
-                onTextChanged = { query ->
+                onTextChanged = {
+                        query ->
                     viewModel.onEvent(SharedEvent.QueryChanged(query = query))
                 }
-            ){
+            ) {
                 viewModel.onEvent(SharedEvent.SearchMovies)
                 toSearchScreen()
             }
@@ -63,27 +67,27 @@ fun HomeScreen(
         Row (
             modifier = Modifier
                 .fillMaxWidth()
-                .weight(0.3f)
+                .weight(0.4f)
                 .padding(horizontal = 24.dp)
         ){
             TopMovies(topMovies = state.popular){ movie ->
                 viewModel.onEvent(SharedEvent.MovieClicked(movie))
-                toMovieDetails()
+                getMovieDetails()
             }
         }
         Row (
             modifier = Modifier
                 .fillMaxWidth()
-                .weight(0.5f)
+                .weight(0.4f)
         ) {
             MovieTabComponent(
-                selectedTabIndex = state.tabPage,
-                onSelectedTab = { index,tabs ->
-                    viewModel.onEvent(SharedEvent.TabClicked(index = index,tabs))
-                },
-                movies = state.tabMovies){ movie ->
+                nowPlaying = state.nowPlaying,
+                popular = state.popular,
+                upcoming = state.upcoming,
+                topRated = state.topRated
+            ){ movie ->
                 viewModel.onEvent(SharedEvent.MovieClicked(movie))
-                toMovieDetails()
+                getMovieDetails()
             }
         }
     }

@@ -2,7 +2,6 @@ package com.example.tmdbapp.di
 
 import com.example.tmdbapp.BuildConfig
 import com.example.tmdbapp.data.remote.services.MovieApi
-import com.example.tmdbapp.data.remote.MovieApiInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,16 +16,14 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-
     @Provides
     @Singleton
-    fun provideOkHttpClient(movieApiInterceptor: MovieApiInterceptor) : OkHttpClient{
+    fun provideOkHttpClient() : OkHttpClient{
         val loggerInterceptor = HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }
         return OkHttpClient.Builder()
             .addInterceptor(loggerInterceptor)
-            .addInterceptor(movieApiInterceptor)
             .build()
     }
 

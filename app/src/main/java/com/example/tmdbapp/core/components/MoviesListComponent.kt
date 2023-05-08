@@ -21,8 +21,8 @@ fun MoviesListComponent(
             .padding(start = 28.dp),
         verticalArrangement = Arrangement.spacedBy(24.dp)
     ){
-        items(movies){ movie ->
-            MovieDetailsComponent(movie = movie ){
+        items(movies){ movieItem ->
+            MovieDetailsComponent(movie = movieItem ){ movie ->
                 goToDetails(movie)
             }
         }

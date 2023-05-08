@@ -12,7 +12,7 @@ fun ReviewsDto.toReviews() : List<Review> {
                 author = reviewDto.author ?: "",
                 content = reviewDto.content ?: "",
                 avatarPath = reviewDto.details?.avatarPath ?: "/xy44UvpbTgzs9kWmp4C3fEaCl5h.png",
-                rating = reviewDto.details?.rating ?: 6.3f
+                rating = reviewDto.details?.rating ?: 5.0f
             )
         )
     }
