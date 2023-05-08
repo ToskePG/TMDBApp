@@ -5,6 +5,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.navigation
 import com.example.tmdbapp.core.navigation.Routes.HOME_SCREEN
 import com.example.tmdbapp.core.navigation.Routes.ROOT
+import com.example.tmdbapp.core.navigation.Routes.SPLASH_SCREEN
 import com.example.tmdbapp.core.navigation.destinations.*
 
 infix fun NavGraphBuilder.rootNavGraph(
@@ -12,7 +13,7 @@ infix fun NavGraphBuilder.rootNavGraph(
 ){
     navigation(
         route = ROOT,
-        startDestination = HOME_SCREEN
+        startDestination = SPLASH_SCREEN
     ){
         this homeScreenComposable navController
         this searchScreenComposable navController

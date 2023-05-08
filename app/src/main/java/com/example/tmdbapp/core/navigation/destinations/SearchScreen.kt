@@ -20,7 +20,10 @@ infix fun NavGraphBuilder.searchScreenComposable(
         val sharedViewModel = hiltViewModel<SharedViewModel>(parentEntry)
         SearchScreen(
             viewModel = sharedViewModel,
-            onArrowClicked = {navController.popBackStack()}
+            onArrowClicked = {navController.popBackStack()},
+            toMovieDetails = {
+                navController.navigate(route = Routes.DETAILS_SCREEN)
+            }
         )
     }
 }

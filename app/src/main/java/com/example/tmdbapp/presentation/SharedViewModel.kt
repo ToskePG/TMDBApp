@@ -5,8 +5,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.tmdbapp.core.utils.Constants
 import com.example.tmdbapp.core.utils.NetworkResponse
+import com.example.tmdbapp.core.utils.PreferenceCache
 import com.example.tmdbapp.domain.model.Cast
 import com.example.tmdbapp.domain.model.Movie
 import com.example.tmdbapp.domain.model.Review
@@ -18,7 +18,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SharedViewModel @Inject constructor(
-    private val repository: MovieRepository
+    private val movieRepo: MovieRepository,
+    private val prefsCache: PreferenceCache
 ) : ViewModel() {
     var state by mutableStateOf(SharedState())
     fun onEvent(event: SharedEvent) {
@@ -30,20 +31,43 @@ class SharedViewModel @Inject constructor(
                 state = state.copy(searchList = listOf())
                 searchMovies(query = state.query)
             }
-            is SharedEvent.TabClicked -> {
-                state = state.copy(tabPage = event.index)
-                changeTab(tab = event.tab)
-            }
-            is SharedEvent.MovieClicked -> {
+
+            is SharedEvent.MovieClicked ->{
                 state = state.copy(detailMovie = event.movie)
                 getCast(id = event.movie.id)
                 getReviews(id = event.movie.id)
-                //isBookmarked(id = event.movie.id)
+                isBookmarked(id = event.movie.id)
             }
-            is SharedEvent.MovieBookmark -> {
-                // checkBookmarks(event.movie)
+            is SharedEvent.MovieBookmark ->{
+                checkBookmarks(event.movie)
             }
         }
+    }
+
+    private fun checkBookmarks(movie: Movie) {
+        prefsCache.watchList.forEachIndexed {  index ,bookmark->
+            if(bookmark.id == movie.id){
+                val list = prefsCache.watchList
+                list.removeAt(index)
+                prefsCache.watchList = list
+                state = state.copy(isBookmarked = false ,watchList = prefsCache.watchList)
+                return
+            }
+        }
+        val list = prefsCache.watchList
+        list.add(movie)
+        prefsCache.watchList = list
+        state = state.copy(isBookmarked = true, watchList = prefsCache.watchList)
+    }
+
+    private fun isBookmarked(id: Int) {
+        prefsCache.watchList.forEach { movie->
+            if(movie.id == id){
+                state = state.copy(isBookmarked = true)
+                return
+            }
+        }
+        state = state.copy(isBookmarked = false)
     }
 
     init {
@@ -51,16 +75,17 @@ class SharedViewModel @Inject constructor(
         getUpcoming()
         getPopular()
         getTopRated()
+        state = state.copy(watchList = prefsCache.watchList)
     }
 
     private fun getNowPlaying(){
         viewModelScope.launch {
-            repository.getNowPlayingMovies().collectLatest { networkResponse ->
+            movieRepo.getNowPlayingMovies().collectLatest { networkResponse ->
                 val moviesList = networkResponse.data
                 when(networkResponse){
                     is NetworkResponse.Success ->{
                         if(moviesList != null){
-                            state = state.copy(nowPlaying = moviesList, tabMovies = moviesList)
+                            state = state.copy(nowPlaying = moviesList)
                         }
                     }
                     is NetworkResponse.Error -> {
@@ -74,7 +99,7 @@ class SharedViewModel @Inject constructor(
 
     private fun getUpcoming(){
         viewModelScope.launch {
-            repository.getUpcomingMovies().collectLatest { networkResponse ->
+            movieRepo.getUpcomingMovies().collectLatest { networkResponse ->
                 val moviesList = networkResponse.data
                 when(networkResponse){
                     is NetworkResponse.Success ->{
@@ -93,7 +118,7 @@ class SharedViewModel @Inject constructor(
 
     private fun getPopular(){
         viewModelScope.launch {
-            repository.getPopularMovies().collectLatest { networkResponse ->
+            movieRepo.getPopularMovies().collectLatest { networkResponse ->
                 val moviesList = networkResponse.data
                 when(networkResponse){
                     is NetworkResponse.Success ->{
@@ -109,10 +134,9 @@ class SharedViewModel @Inject constructor(
             }
         }
     }
-
     private fun getTopRated(){
         viewModelScope.launch {
-            repository.getTopRatedMovies().collectLatest { networkResponse ->
+            movieRepo.getTopRatedMovies().collectLatest { networkResponse ->
                 val moviesList = networkResponse.data
                 when(networkResponse){
                     is NetworkResponse.Success ->{
@@ -131,12 +155,12 @@ class SharedViewModel @Inject constructor(
 
     private fun searchMovies(query : String){
         viewModelScope.launch {
-            repository.getSearch(query = query).collectLatest { networkResponse ->
-                val movies = networkResponse.data
+            movieRepo.getSearch(query = query).collectLatest { networkResponse ->
+                val moviesList = networkResponse.data
                 when(networkResponse){
-                    is NetworkResponse.Success ->{
-                        if (movies != null) {
-                            state = state.copy(searchList = movies)
+                    is NetworkResponse.Success -> {
+                        if (moviesList != null) {
+                            state = state.copy(searchList = moviesList)
                         }
                     }
                     is NetworkResponse.Error -> {
@@ -148,26 +172,9 @@ class SharedViewModel @Inject constructor(
         }
     }
 
-    private fun changeTab(tab : Constants.Tabs){
-        state = when(tab){
-            Constants.Tabs.NOW_PLAYING -> {
-                state.copy(tabMovies = state.nowPlaying)
-            }
-            Constants.Tabs.UPCOMING -> {
-                state.copy(tabMovies = state.upcoming)
-            }
-            Constants.Tabs.TOP_RATED -> {
-                state.copy(tabMovies = state.topRated)
-            }
-            Constants.Tabs.POPULAR -> {
-                state.copy(tabMovies = state.popular)
-            }
-        }
-    }
-
     private fun getReviews(id : Int){
         viewModelScope.launch {
-            repository.getReviews(id = id).collectLatest { networkResponse ->
+            movieRepo.getReviews(id = id).collectLatest { networkResponse ->
                 val reviews = networkResponse.data
                 when(networkResponse){
                     is NetworkResponse.Success -> {
@@ -185,7 +192,7 @@ class SharedViewModel @Inject constructor(
     }
     private fun getCast(id : Int){
         viewModelScope.launch {
-            repository.getCast(id = id).collectLatest { networkResponse ->
+            movieRepo.getCast(id = id).collectLatest { networkResponse ->
                 val cast = networkResponse.data
                 when(networkResponse){
                     is NetworkResponse.Success -> {
@@ -204,27 +211,22 @@ class SharedViewModel @Inject constructor(
 }
 
 data class SharedState(
-    val shouldShowSearch: Boolean = false,
     val isError: Boolean = false,
     val nowPlaying : List<Movie> = listOf(),
     val upcoming : List<Movie> = listOf(),
     val popular : List<Movie> = listOf(),
     val topRated : List<Movie> = listOf(),
-    val tabMovies : List<Movie> = listOf(),
-    val tabPage : Int = 0,
     val query: String = String(),
     val searchList : List<Movie> = listOf(),
-    val shouldShowBottomNavBar : Boolean = true,
     val watchList : MutableList<Movie> = mutableListOf(),
-    val isBookmarked : Boolean = false,
     val detailMovie : Movie? = null,
+    val isBookmarked : Boolean = false,
     val reviews : List<Review> = listOf(),
     val cast : List<Cast> = listOf()
 )
 sealed class SharedEvent {
     data class QueryChanged(val query: String) : SharedEvent()
     object SearchMovies : SharedEvent()
-    data class TabClicked(val index : Int, val tab : Constants.Tabs) : SharedEvent()
     data class MovieClicked(val movie : Movie) : SharedEvent()
     data class MovieBookmark(val movie : Movie) : SharedEvent()
 }

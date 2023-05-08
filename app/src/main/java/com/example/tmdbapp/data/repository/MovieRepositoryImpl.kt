@@ -16,104 +16,104 @@ import java.io.IOException
 import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
-    private val api: MovieApi
+    private val moviesApi: MovieApi
 ) : MovieRepository {
     override suspend fun getPopularMovies(): Flow<NetworkResponse<List<Movie>>> {
-       return flow {
-           emit(NetworkResponse.Loading())
-           try {
-               val response = api.getPopularMovies()
-               val moviesDto = response.body()
-               if (response.isSuccessful && response.body() != null) {
-                   val movies = moviesDto?.toMovies()
-                   emit(NetworkResponse.Success(data = movies))
-               } else {
-                   emit(NetworkResponse.Error(message = "An error occurred."))
-               }
-           }catch (e: IOException) {
-               emit(NetworkResponse.Error(message = "Request failed"))
-           } catch (e: HttpException) {
-               emit(NetworkResponse.Error(message = "Request failed"))
-           }
-       }
-    }
-
-    override suspend fun getNowPlayingMovies(): Flow<NetworkResponse<List<Movie>>> {
-        return flow {
+        return flow{
             emit(NetworkResponse.Loading())
             try {
-                val response = api.getNowPlayingMovies()
+                val response = moviesApi.getPopularMovies()
                 val moviesDto = response.body()
                 if (response.isSuccessful && response.body() != null) {
                     val movies = moviesDto?.toMovies()
                     emit(NetworkResponse.Success(data = movies))
                 } else {
-                    emit(NetworkResponse.Error(message = "An error occurred."))
+                    emit(NetworkResponse.Error(message = "An error occurred during communication with server. "))
                 }
-            }catch (e: IOException) {
-                emit(NetworkResponse.Error(message = "Request failed"))
+            } catch (e: IOException) {
+                emit(NetworkResponse.Error(message = "Request failed for the following reason: ${e.message}"))
             } catch (e: HttpException) {
-                emit(NetworkResponse.Error(message = "Request failed"))
+                emit(NetworkResponse.Error(message = "Request failed for the following reason: ${e.message}"))
+            }
+        }
+    }
+
+    override suspend fun getNowPlayingMovies(): Flow<NetworkResponse<List<Movie>>> {
+        return flow{
+            emit(NetworkResponse.Loading())
+            try {
+                val response = moviesApi.getNowPlayingMovies()
+                val moviesDto = response.body()
+                if (response.isSuccessful && response.body() != null) {
+                    val movies = moviesDto?.toMovies()
+                    emit(NetworkResponse.Success(data = movies))
+                } else {
+                    emit(NetworkResponse.Error(message = "An error occurred during communication with server. "))
+                }
+            } catch (e: IOException) {
+                emit(NetworkResponse.Error(message = "Request failed for the following reason: ${e.message}"))
+            } catch (e: HttpException) {
+                emit(NetworkResponse.Error(message = "Request failed for the following reason: ${e.message}"))
             }
         }
     }
 
     override suspend fun getUpcomingMovies(): Flow<NetworkResponse<List<Movie>>> {
-        return flow {
+        return flow{
             emit(NetworkResponse.Loading())
             try {
-                val response = api.getUpcomingMovies()
+                val response = moviesApi.getUpcomingMovies()
                 val moviesDto = response.body()
                 if (response.isSuccessful && response.body() != null) {
                     val movies = moviesDto?.toMovies()
                     emit(NetworkResponse.Success(data = movies))
                 } else {
-                    emit(NetworkResponse.Error(message = "An error occurred."))
+                    emit(NetworkResponse.Error(message = "An error occurred during communication with server. "))
                 }
-            }catch (e: IOException) {
-                emit(NetworkResponse.Error(message = "Request failed"))
+            } catch (e: IOException) {
+                emit(NetworkResponse.Error(message = "Request failed for the following reason: ${e.message}"))
             } catch (e: HttpException) {
-                emit(NetworkResponse.Error(message = "Request failed"))
+                emit(NetworkResponse.Error(message = "Request failed for the following reason: ${e.message}"))
             }
         }
     }
 
     override suspend fun getTopRatedMovies(): Flow<NetworkResponse<List<Movie>>> {
-        return flow {
+        return flow{
             emit(NetworkResponse.Loading())
             try {
-                val response = api.getTopRatedMovies()
+                val response = moviesApi.getTopRatedMovies()
                 val moviesDto = response.body()
                 if (response.isSuccessful && response.body() != null) {
                     val movies = moviesDto?.toMovies()
                     emit(NetworkResponse.Success(data = movies))
                 } else {
-                    emit(NetworkResponse.Error(message = "An error occurred."))
+                    emit(NetworkResponse.Error(message = "An error occurred during communication with server. "))
                 }
-            }catch (e: IOException) {
-                emit(NetworkResponse.Error(message = "Request failed"))
+            } catch (e: IOException) {
+                emit(NetworkResponse.Error(message = "Request failed for the following reason: ${e.message}"))
             } catch (e: HttpException) {
-                emit(NetworkResponse.Error(message = "Request failed"))
+                emit(NetworkResponse.Error(message = "Request failed for the following reason: ${e.message}"))
             }
         }
     }
 
-    override suspend fun getSearch(query: String): Flow<NetworkResponse<List<Movie>>> {
-        return flow {
+    override suspend fun getSearch(query : String): Flow<NetworkResponse<List<Movie>>> {
+        return flow{
             emit(NetworkResponse.Loading())
             try {
-                val response = api.searchMovies(query = query)
+                val response = moviesApi.searchMovies(query = query)
                 val moviesDto = response.body()
                 if (response.isSuccessful && response.body() != null) {
-                    val movies = moviesDto?.toMovies()
+                    val movies  = moviesDto?.toMovies()
                     emit(NetworkResponse.Success(data = movies))
                 } else {
-                    emit(NetworkResponse.Error(message = "An error occurred."))
+                    emit(NetworkResponse.Error(message = "An error occurred during communication with server. "))
                 }
-            }catch (e: IOException) {
-                emit(NetworkResponse.Error(message = "Request failed"))
+            } catch (e: IOException) {
+                emit(NetworkResponse.Error(message = "Request failed for the following reason: ${e.message}"))
             } catch (e: HttpException) {
-                emit(NetworkResponse.Error(message = "Request failed"))
+                emit(NetworkResponse.Error(message = "Request failed for the following reason: ${e.message}"))
             }
         }
     }
@@ -122,7 +122,7 @@ class MovieRepositoryImpl @Inject constructor(
         return flow{
             emit(NetworkResponse.Loading())
             try {
-                val response = api.getReviews(id)
+                val response = moviesApi.getReviews(id)
                 val reviewsDto = response.body()
                 if(response.isSuccessful && response.body() != null){
                     val reviews = reviewsDto?.toReviews()
@@ -142,7 +142,7 @@ class MovieRepositoryImpl @Inject constructor(
         return flow{
             emit(NetworkResponse.Loading())
             try {
-                val response = api.getCast(id)
+                val response = moviesApi.getCast(id)
                 val creditsDto = response.body()
                 if(response.isSuccessful && response.body() != null){
                     val cast = creditsDto?.toCast()

@@ -12,16 +12,19 @@ import com.example.tmdbapp.domain.model.Movie
 
 @Composable
 fun MoviesListComponent(
-    movies : List<Movie>
+    movies : List<Movie>,
+    goToDetails : (movie : Movie) -> Unit
 ) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .padding(start = 32.dp),
+            .padding(start = 28.dp),
         verticalArrangement = Arrangement.spacedBy(24.dp)
     ){
-        items(movies){ movie ->
-            MovieDetailsComponent(movie = movie )
+        items(movies){ movieItem ->
+            MovieDetailsComponent(movie = movieItem ){ movie ->
+                goToDetails(movie)
+            }
         }
     }
 }

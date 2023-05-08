@@ -11,7 +11,7 @@ infix fun NavGraphBuilder.splashScreenComposable(
 ){
     composable(route = Routes.SPLASH_SCREEN) {
         SplashScreen(
-            goHome = {
+            load = {
                 navController.popBackStack()
                 navController.navigate(route = Routes.HOME_SCREEN)
             }

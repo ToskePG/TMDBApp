@@ -16,6 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tmdbapp.core.components.MoviesListComponent
+import com.example.tmdbapp.presentation.SharedEvent
 import com.example.tmdbapp.presentation.SharedViewModel
 import com.example.tmdbapp.ui.theme.DarkBlue
 
@@ -23,6 +24,7 @@ import com.example.tmdbapp.ui.theme.DarkBlue
 fun WatchListScreen(
     viewModel : SharedViewModel,
     onArrowClicked : () -> Unit,
+    goToDetails : () -> Unit
 ) {
     val state = viewModel.state
     Column(
@@ -62,7 +64,10 @@ fun WatchListScreen(
                 .weight(0.9f)
         ){
             if(state.watchList.isEmpty()) WatchListEmptyComponent()
-            else MoviesListComponent(movies = state.watchList)
+            else MoviesListComponent(movies = state.watchList){ movie ->
+                viewModel.onEvent(SharedEvent.MovieClicked(movie))
+                goToDetails()
+            }
         }
     }
 }

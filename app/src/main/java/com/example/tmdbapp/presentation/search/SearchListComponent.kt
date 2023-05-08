@@ -13,7 +13,8 @@ import androidx.compose.ui.Modifier
 
 @Composable
 fun SearchListComponent(
-    movies : List<Movie>
+    movies : List<Movie>,
+    goToDetails : (movie : Movie) -> Unit
 ) {
     LazyColumn(
         modifier = Modifier
@@ -22,7 +23,9 @@ fun SearchListComponent(
         verticalArrangement = Arrangement.spacedBy(24.dp)
     ){
         items(movies){ movie ->
-            MovieDetailsComponent(movie = movie )
+            MovieDetailsComponent(movie = movie){ movie ->
+                goToDetails(movie)
+            }
         }
     }
 }
