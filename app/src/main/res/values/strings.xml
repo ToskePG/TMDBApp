@@ -7,6 +7,7 @@
     <string name="empty_state">We Are Sorry, We Can Not Find The Movie :(</string>
     <string name="search_error_2">Find your movie by Type title, categories, years, etc </string>
     <string name="watch_list">Watch list</string>
+    <string name="detail">Detail</string>
     <string name="watch_list_empty_1">There is no movie yet!</string>
     <string name="watch_list_empty_2">Find your movie by Type title, categories, years, etc </string>
 </resources>
