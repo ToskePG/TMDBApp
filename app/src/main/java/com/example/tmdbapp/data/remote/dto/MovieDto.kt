@@ -13,5 +13,7 @@ data class MovieDto(
     @SerializedName("release_date")
     val date: String? = null,
     val runtime: Int? = null,
-    val overview: String? = null
+    val overview: String? = null,
+    @SerializedName("backdrop_path")
+    val backdrop : String? = null
 )
