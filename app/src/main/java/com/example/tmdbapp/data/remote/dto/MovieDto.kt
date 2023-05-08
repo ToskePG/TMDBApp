@@ -15,5 +15,5 @@ data class MovieDto(
     val runtime: Int? = null,
     val overview: String? = null,
     @SerializedName("backdrop_path")
-    val backdrop : String? = null
+    val backdrop : String = ""
 )

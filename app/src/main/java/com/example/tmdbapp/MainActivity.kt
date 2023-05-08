@@ -3,7 +3,6 @@ package com.example.tmdbapp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -20,7 +19,6 @@ import androidx.navigation.compose.rememberNavController
 import com.example.tmdbapp.core.components.BottomNavBar
 import com.example.tmdbapp.core.navigation.Routes
 import com.example.tmdbapp.core.navigation.graphs.AppNav
-import com.example.tmdbapp.presentation.SharedViewModel
 import com.example.tmdbapp.ui.theme.TMDBAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 

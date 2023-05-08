@@ -1,6 +1,7 @@
 package com.example.tmdbapp.core.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import com.example.tmdbapp.R
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -10,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -20,6 +22,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.tmdbapp.core.utils.toYear
 import com.example.tmdbapp.domain.model.Movie
+import com.example.tmdbapp.ui.theme.DarkBlue
 import com.example.tmdbapp.ui.theme.Gray
 import com.example.tmdbapp.ui.theme.Orange
 import com.example.tmdbapp.ui.theme.TMDBAppTheme
@@ -27,27 +30,31 @@ import com.example.tmdbapp.ui.theme.TMDBAppTheme
 
 @Composable
 fun MovieDetailsComponent(
-    movie : Movie
+    movie : Movie,
+    goToDetails : (movie : Movie) -> Unit
 ){
     Row(
         modifier = Modifier
             .fillMaxSize()
-            .padding(start = 32.dp)
-            .background(Gray)
+            .background(DarkBlue)
     ) {
         Column(
             modifier = Modifier
-                .width(120.dp)
-                .height(90.dp)
-                .clip(RoundedCornerShape(16.dp))
+                .wrapContentSize()
         ) {
             AsyncImage(
                 modifier = Modifier
-                    .fillMaxSize(),
+                    .clip(shape = RoundedCornerShape(16.dp))
+                    .width(120.dp)
+                    .height(90.dp)
+                    .clickable {
+                         goToDetails(movie)
+                    },
                 model = stringResource(
                     id = R.string.poster_template,
                     movie.poster),
-                contentDescription = null)
+                contentDescription = null,
+            contentScale = ContentScale.Crop)
         }
     }
     Column(
@@ -67,13 +74,13 @@ fun MovieDetailsComponent(
         Row(
             modifier = Modifier
                 .padding(top = 15.dp),
-            horizontalArrangement = Arrangement.spacedBy(5.5.dp)
+            horizontalArrangement = Arrangement.spacedBy(5.dp)
         ){
             Column(
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ){
                 Row(
-                    horizontalArrangement = Arrangement.spacedBy(5.5.dp)
+                    horizontalArrangement = Arrangement.spacedBy(5.dp)
                 ) {
                     Icon(
                         painter = painterResource(id =  R.drawable.rates_ic),

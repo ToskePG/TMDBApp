@@ -148,12 +148,12 @@ class MovieRepositoryImpl @Inject constructor(
                     val cast = creditsDto?.toCast()
                     emit(NetworkResponse.Success(data = cast))
                 }else {
-                    emit(NetworkResponse.Error(message = "An error occurred during communication with server. "))
+                    emit(NetworkResponse.Error(message = "An error occurred. "))
                 }
             } catch (e: IOException) {
-                emit(NetworkResponse.Error(message = "Request failed for the following reason: ${e.message}"))
+                emit(NetworkResponse.Error(message = "Request failed."))
             } catch (e: HttpException) {
-                emit(NetworkResponse.Error(message = "Request failed for the following reason: ${e.message}"))
+                emit(NetworkResponse.Error(message = "Request failed."))
             }
         }
     }

@@ -1,8 +1,7 @@
 package com.example.tmdbapp.core.components
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -25,12 +24,11 @@ fun SearchBar(
     placeholder: String,
     isError: Boolean,
     onTextChanged: (text: String) -> Unit,
-    onSearch: () -> Unit
+    onSearched: () -> Unit
 ){
         OutlinedTextField(
             modifier = Modifier
-                .padding(all = 16.dp)
-                .fillMaxSize(),
+                .fillMaxWidth(),
             value = value,
             singleLine = true,
             shape = RoundedCornerShape(16.dp),
@@ -38,14 +36,21 @@ fun SearchBar(
             keyboardOptions = KeyboardOptions(
                 imeAction = ImeAction.Search),
             keyboardActions = KeyboardActions(
-                onSearch = { onSearch() }
+                onSearch = {
+                    onSearched()
+                }
             ),
             placeholder = {
                 Text(text = placeholder, color = Gray)
             },
             trailingIcon = {
-                IconButton(onClick = { onSearch() }) {
-                    Icon(imageVector = Icons.Default.Search, contentDescription = null, tint = White)
+                IconButton(onClick = {
+                    onSearched()
+                }) {
+                    Icon(
+                        imageVector = Icons.Default.Search,
+                        contentDescription = null,
+                        tint = White)
                 }
             },
             onValueChange = {onTextChanged(it)},
@@ -68,7 +73,7 @@ fun SearchBarPreview(){
                 value = "",
                 placeholder = "Search for movies...",
                 isError = false,
-                onSearch = { /*TODO*/ },
+                onSearched = { /*TODO*/ },
                 onTextChanged = {}
             )
         }

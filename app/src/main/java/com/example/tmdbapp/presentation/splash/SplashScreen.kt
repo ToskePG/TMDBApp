@@ -20,7 +20,7 @@ import kotlinx.coroutines.delay
 
 @Composable
 fun SplashScreen(
-    goHome : () -> Unit
+    load : () -> Unit
 ) {
     var startAnimation by remember { mutableStateOf(false) }
     val alphaAnim = animateFloatAsState(
@@ -33,7 +33,7 @@ fun SplashScreen(
     LaunchedEffect(key1 = true) {
         startAnimation = true
         delay(2000)
-        goHome()
+        load()
     }
 
     Box(

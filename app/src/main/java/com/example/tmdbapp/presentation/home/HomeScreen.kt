@@ -63,7 +63,7 @@ fun HomeScreen(
         Row (
             modifier = Modifier
                 .fillMaxWidth()
-                .weight(0.4f)
+                .weight(0.3f)
                 .padding(horizontal = 24.dp)
         ){
             TopMovies(topMovies = state.popular){ movie ->
@@ -74,7 +74,7 @@ fun HomeScreen(
         Row (
             modifier = Modifier
                 .fillMaxWidth()
-                .weight(0.4f)
+                .weight(0.5f)
         ) {
             MovieTabComponent(
                 selectedTabIndex = state.tabPage,

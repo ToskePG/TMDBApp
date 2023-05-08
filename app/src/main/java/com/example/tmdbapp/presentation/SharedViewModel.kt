@@ -41,7 +41,7 @@ class SharedViewModel @Inject constructor(
                 //isBookmarked(id = event.movie.id)
             }
             is SharedEvent.MovieBookmark -> {
-                // checkBookmarks(event.movie)
+                //checkBookmarks(event.movie)
             }
         }
     }
