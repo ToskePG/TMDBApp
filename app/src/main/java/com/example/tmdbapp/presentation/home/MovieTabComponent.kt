@@ -28,7 +28,8 @@ import com.example.tmdbapp.domain.model.Movie
 fun MovieTabComponent(
     selectedTabIndex: Int,
     onSelectedTab: (Int, Constants.Tabs) -> Unit,
-    movies: List<Movie>
+    movies: List<Movie>,
+    toSingleMovieDetails : (movie:Movie) -> Unit
 ){
     Column(
         modifier = Modifier

@@ -15,7 +15,8 @@ import com.example.tmdbapp.domain.model.Movie
 
 @Composable
 fun TopMovies(
-    topMovies: List<Movie>
+    topMovies: List<Movie>,
+    toSingleMovieDetails : (movie: Movie) -> Unit
 ){
     LazyRow(modifier = Modifier
         .fillMaxSize()

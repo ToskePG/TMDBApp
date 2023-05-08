@@ -19,7 +19,8 @@ import com.example.tmdbapp.presentation.SharedEvent
 @Composable
 fun HomeScreen(
     viewModel : SharedViewModel,
-    toSearchScreen: () -> Unit
+    toSearchScreen: () -> Unit,
+    toMovieDetails : () -> Unit
 ){
     val state = viewModel.state
     Column(
@@ -65,7 +66,10 @@ fun HomeScreen(
                 .weight(0.4f)
                 .padding(horizontal = 24.dp)
         ){
-            TopMovies(topMovies = state.popular)
+            TopMovies(topMovies = state.popular){ movie ->
+                viewModel.onEvent(SharedEvent.MovieClicked(movie))
+                toMovieDetails()
+            }
         }
         Row (
             modifier = Modifier
@@ -77,7 +81,10 @@ fun HomeScreen(
                 onSelectedTab = { index,tabs ->
                     viewModel.onEvent(SharedEvent.TabClicked(index = index,tabs))
                 },
-                movies = state.tabMovies)
+                movies = state.tabMovies){ movie ->
+                viewModel.onEvent(SharedEvent.MovieClicked(movie))
+                toMovieDetails()
+            }
         }
     }
 }

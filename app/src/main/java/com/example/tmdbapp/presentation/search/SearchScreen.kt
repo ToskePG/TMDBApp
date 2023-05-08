@@ -22,7 +22,8 @@ import com.example.tmdbapp.presentation.SharedEvent
 @Composable
 fun SearchScreen(
     viewModel : SharedViewModel,
-    onArrowClicked : () -> Unit
+    onArrowClicked : () -> Unit,
+    getMovieDetails : () -> Unit
 ){
     val state = viewModel.state
     Column(
