@@ -19,7 +19,8 @@ fun MoviesDto.toMovies() : List<Movie>{
                 overview = movieDto.overview ?: "",
                 title = movieDto.title ?: "",
                 runtime = movieDto.runtime ?: Random.nextInt(100,180),
-                votes = movieDto.averageVote ?: -1f
+                votes = movieDto.averageVote ?: -1f,
+                backdrop = movieDto.backdrop!!
             )
         )
     }

@@ -134,23 +134,3 @@ fun MovieDetailsComponent(
         }
     }
 }
-
-
-@Preview(showBackground = false)
-@Composable
-fun MovieDetailsComponentPreview() {
-    TMDBAppTheme{
-        MovieDetailsComponent(
-            Movie(
-                votes = 7.2f,
-                title = "Spider-Man",
-                runtime = 139,
-                overview = "OVERWIEW OF THE MOVIE",
-                date = "2023-22-09",
-                poster = stringResource(id = R.string.poster_template,"/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg"),
-                genre = "Action",
-                id = 13
-            )
-        )
-    }
-}

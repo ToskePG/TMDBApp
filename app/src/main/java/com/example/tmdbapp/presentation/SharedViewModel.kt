@@ -7,7 +7,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tmdbapp.core.utils.Constants
 import com.example.tmdbapp.core.utils.NetworkResponse
+import com.example.tmdbapp.domain.model.Cast
 import com.example.tmdbapp.domain.model.Movie
+import com.example.tmdbapp.domain.model.Review
 import com.example.tmdbapp.domain.repository.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -31,6 +33,15 @@ class SharedViewModel @Inject constructor(
             is SharedEvent.TabClicked -> {
                 state = state.copy(tabPage = event.index)
                 changeTab(tab = event.tab)
+            }
+            is SharedEvent.MovieClicked -> {
+                state = state.copy(detailMovie = event.movie)
+                getCast(id = event.movie.id)
+                getReviews(id = event.movie.id)
+                //isBookmarked(id = event.movie.id)
+            }
+            is SharedEvent.MovieBookmark -> {
+                // checkBookmarks(event.movie)
             }
         }
     }
@@ -154,6 +165,42 @@ class SharedViewModel @Inject constructor(
         }
     }
 
+    private fun getReviews(id : Int){
+        viewModelScope.launch {
+            repository.getReviews(id = id).collectLatest { networkResponse ->
+                val reviews = networkResponse.data
+                when(networkResponse){
+                    is NetworkResponse.Success -> {
+                        if (reviews != null) {
+                            state = state.copy(reviews = reviews)
+                        }
+                    }
+                    is NetworkResponse.Error -> {
+                        state = state.copy( isError = true )
+                    }
+                    is NetworkResponse.Loading -> Unit
+                }
+            }
+        }
+    }
+    private fun getCast(id : Int){
+        viewModelScope.launch {
+            repository.getCast(id = id).collectLatest { networkResponse ->
+                val cast = networkResponse.data
+                when(networkResponse){
+                    is NetworkResponse.Success -> {
+                        if (cast != null) {
+                            state = state.copy(cast = cast)
+                        }
+                    }
+                    is NetworkResponse.Error -> {
+                        state = state.copy( isError = true )
+                    }
+                    is NetworkResponse.Loading -> Unit
+                }
+            }
+        }
+    }
 }
 
 data class SharedState(
@@ -168,10 +215,16 @@ data class SharedState(
     val query: String = String(),
     val searchList : List<Movie> = listOf(),
     val shouldShowBottomNavBar : Boolean = true,
-    val watchList : MutableList<Movie> = mutableListOf()
+    val watchList : MutableList<Movie> = mutableListOf(),
+    val isBookmarked : Boolean = false,
+    val detailMovie : Movie? = null,
+    val reviews : List<Review> = listOf(),
+    val cast : List<Cast> = listOf()
 )
 sealed class SharedEvent {
     data class QueryChanged(val query: String) : SharedEvent()
     object SearchMovies : SharedEvent()
     data class TabClicked(val index : Int, val tab : Constants.Tabs) : SharedEvent()
+    data class MovieClicked(val movie : Movie) : SharedEvent()
+    data class MovieBookmark(val movie : Movie) : SharedEvent()
 }

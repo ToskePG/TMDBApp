@@ -5,9 +5,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.navigation
 import com.example.tmdbapp.core.navigation.Routes.HOME_SCREEN
 import com.example.tmdbapp.core.navigation.Routes.ROOT
-import com.example.tmdbapp.core.navigation.destinations.homeScreenComposable
-import com.example.tmdbapp.core.navigation.destinations.searchScreenComposable
-import com.example.tmdbapp.core.navigation.destinations.watchListScreenComposable
+import com.example.tmdbapp.core.navigation.destinations.*
 
 infix fun NavGraphBuilder.rootNavGraph(
     navController: NavController
@@ -19,5 +17,7 @@ infix fun NavGraphBuilder.rootNavGraph(
         this homeScreenComposable navController
         this searchScreenComposable navController
         this watchListScreenComposable navController
+        this detailsScreenComposable navController
+        this splashScreenComposable navController
     }
 }

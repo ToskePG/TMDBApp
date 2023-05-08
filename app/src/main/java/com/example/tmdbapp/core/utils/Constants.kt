@@ -10,4 +10,9 @@ object Constants {
         TOP_RATED,
         POPULAR
     }
+    enum class PagerTabs {
+        ABOUT_MOVIE,
+        REVIEWS,
+        CAST
+    }
 }
