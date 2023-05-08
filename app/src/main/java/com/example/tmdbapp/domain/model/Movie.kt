@@ -10,5 +10,6 @@ data class Movie (
     val genre : String,
     val date : String,
     val runtime : Int,
-    val overview : String
+    val overview : String,
+    val backdrop : String
 )
