@@ -34,7 +34,7 @@ fun Int.idToGenre() : String {
     return ""
 }
 
-fun String.toTabName() : String{
+fun String.toName() : String{
     var tab : String = this[0].toString()
     for (i in  1 until this.length){
         if(this[i] == '_'){
