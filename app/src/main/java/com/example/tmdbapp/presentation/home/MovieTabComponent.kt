@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.tmdbapp.R
 import com.example.tmdbapp.core.utils.Constants
-import com.example.tmdbapp.core.utils.toTabName
+import com.example.tmdbapp.core.utils.toName
 import com.example.tmdbapp.domain.model.Movie
 
 @Composable
@@ -52,7 +52,7 @@ fun MovieTabComponent(
                         .background(Gray),
                     selected = index == selectedTabIndex,
                     onClick = {onSelectedTab(index,tabs)},
-                    text = {Text(text = tabs.name.toTabName(), maxLines = 1, fontSize = 14.sp)}
+                    text = {Text(text = tabs.name.toName(), maxLines = 1, fontSize = 14.sp)}
                 )
             }
         }
